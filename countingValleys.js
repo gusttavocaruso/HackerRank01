@@ -1,27 +1,30 @@
-function countingValleys(steps, path) {
+function countingValleys(_steps, path) {
   const eachPath = path.split('');
   let way = [];
   let initial = 0;
-  const valley = [];
+  let seaLevel = 0;
+  let valley = 0;
 
   eachPath.forEach((path) => {
     path === 'U' ? way.push(+1) : way.push(-1);
   })
 
   way.forEach((w) => {
+    initial === 0 ? seaLevel = 1 : '';
     initial += w;
-    console.log('init', initial)
-    initial < 0 ? valley.push(1) : ''
-  })
 
-  console.log('caminho', way);
-  // console.log('initial', initial);
-  console.log('vale', valley)
-  // return valley;
+
+    if (initial < 0 && seaLevel === 1) {
+      seaLevel = 0;
+      valley += 1
+    }
+  });
+
+  return valley;
 }
 
 const steps = 8;
-const path = 'UDDDUDUU';
+const path = 'DDUUDDUDUUUD';
 
 console.log(countingValleys(steps, path));
 
